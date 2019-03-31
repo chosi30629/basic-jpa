@@ -19,3 +19,12 @@ public class JpaMain {
     }
 
 }
+
+/*
+    1. h2 서버모드 실행
+        cd h2/bin
+        chmod +x h2.sh
+        ./h2.sh
+
+    2. h2 버전과 pom.xml의 라이브러리 버전이 맞아야함
+ */
