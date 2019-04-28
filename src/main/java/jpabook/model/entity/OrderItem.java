@@ -1,10 +1,12 @@
-package jpabook;
+package jpabook.model.entity;
+
+import jpabook.model.entity.item.Item;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ORDER_ITEM")
-public class OrderItem {
+public class OrderItem extends BaseEntity {
 
     @Id
     @GeneratedValue
