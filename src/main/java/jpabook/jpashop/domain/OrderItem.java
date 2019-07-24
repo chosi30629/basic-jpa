@@ -1,6 +1,7 @@
-package jpabook.jpashop.domain.entity;
+package jpabook.jpashop.domain;
 
-import jpabook.jpashop.domain.entity.item.Item;
+import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.exception.NotEnoughStockException;
 
 import javax.persistence.*;
 
@@ -16,11 +17,11 @@ public class OrderItem extends BaseEntity {
     private int orderPrice;
     private int count;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ITEM_ID")
     private Item item;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID")
     private Order order;
 
@@ -64,4 +65,26 @@ public class OrderItem extends BaseEntity {
         this.item = item;
     }
 
+    // 생성 메소드
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) throws NotEnoughStockException {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    // 비즈니스 로직
+    // 주문 취소
+    public void cancel() {
+        getItem().addStock(count);
+    }
+
+    // 조회 로직
+    // 주문상품 전체 가격 조회
+    public int getTotalPrice() {
+        return getOrderPrice() * getCount();
+    }
 }

@@ -1,4 +1,4 @@
-package jpabook.jpashop.domain.entity.item;
+package jpabook.jpashop.domain.item;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -32,7 +32,7 @@ public class Book extends Item {
         return "Book{" +
                 "author='" + author + '\'' +
                 ", isbn='" + isbn + '\'' +
-                '}';
+                "} " + super.toString();
     }
 
 }

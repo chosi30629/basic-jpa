@@ -1,4 +1,4 @@
-package jpabook.jpashop.domain.entity;
+package jpabook.jpashop.domain;
 
 import javax.persistence.*;
 
@@ -18,6 +18,14 @@ public class Delivery extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
+
+    public Delivery() {
+
+    }
+
+    public Delivery(Address address) {
+        this.address = address;
+    }
 
     public Long getId() {
         return id;

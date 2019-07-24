@@ -1,7 +1,8 @@
-package jpabook.jpashop.domain.entity.item;
+package jpabook.jpashop.domain.item;
 
-import jpabook.jpashop.domain.entity.BaseEntity;
-import jpabook.jpashop.domain.entity.Category;
+import jpabook.jpashop.domain.BaseEntity;
+import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.exception.NotEnoughStockException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -62,6 +63,29 @@ public abstract class Item extends BaseEntity {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
+    }
+
+    // 비즈니스 로직
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    public void removeStock(int quantity) throws NotEnoughStockException {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock <  0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", stockQuantity=" + stockQuantity +
+                '}';
     }
 
 }

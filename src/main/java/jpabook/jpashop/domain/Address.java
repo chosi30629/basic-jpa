@@ -1,4 +1,4 @@
-package jpabook.jpashop.domain.entity;
+package jpabook.jpashop.domain;
 
 import javax.persistence.Embeddable;
 import java.util.Objects;

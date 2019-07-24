@@ -1,6 +1,6 @@
-package jpabook.jpashop.domain.entity;
+package jpabook.jpashop.domain;
 
-import jpabook.jpashop.domain.entity.item.Item;
+import jpabook.jpashop.domain.item.Item;
 
 import javax.persistence.*;
 import java.util.ArrayList;
